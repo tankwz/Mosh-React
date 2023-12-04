@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Message from './Message';
 import Alert from './components/Alert';
 import Button from './components/Button';
@@ -8,6 +9,7 @@ function App() {
   const age = 2;
   const textArr = ['a', 'b', 'c', 'd'];
   const numbArr = [1, 2, 2, 3];
+  const [alertVisible, setAlertVisibility] = useState(false);
   const handleSelectItem = (item: string) => {
     console.log(item);
   };
@@ -15,17 +17,26 @@ function App() {
   const handleClick = () => {
     a++;
     console.log('huh' + a);
+    setAlertVisibility(!alertVisible);
+  };
+  const handleClose = () => {
+    setAlertVisibility(false);
   };
   return (
     <div className="container my-4">
       <Button color="secondary" onClick={handleClick}>
         A button i supposed
       </Button>
-      <hr />
-      <Alert>
-        <h1>AAA</h1>
-        <h2>we</h2>
-      </Alert>
+      {alertVisible && (
+        <>
+          <hr />
+
+          <Alert handleClose={handleClose}>
+            <h1>AAA</h1>
+            <h2>weee</h2>
+          </Alert>
+        </>
+      )}
       <hr />
       <Message name={name} age={age} />
       <hr />
