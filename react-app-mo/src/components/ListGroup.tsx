@@ -1,22 +1,26 @@
 import { useState } from 'react';
 
-function ListGroup() {
+interface Props<A> {
+  arr: A[];
+  heading: string;
+}
+
+function ListGroup<T>({ arr, heading }: Props<T>) {
   const [selectedItem, setSelectedItem] = useState(-1);
-  const items = ['a', 'b', 'c', 'd'];
+
   return (
     <div className="container ">
       <ul className="list-group">
-        {items.map((item, index) => (
+        <li className="list-group-item list-group-item-info"> {heading} </li>
+        {arr.map((item, index) => (
           <li
             key={index}
-            className={
-              selectedItem === index
-                ? 'active list-group-item'
-                : ' list-group-item '
-            }
+            className={`list-group-item ${
+              selectedItem === index ? 'active' : ''
+            }`}
             onClick={() => setSelectedItem(index)}
           >
-            {item}
+            {String(item)}
           </li>
         ))}
       </ul>
